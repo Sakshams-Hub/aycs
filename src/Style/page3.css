@@ -1,0 +1,56 @@
+/* Styles for Page 3: Select a Design, View Video, Confirm */
+
+.page3-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  @media (min-width: 768px) {
+    .page3-container {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+  }
+  
+  .page3-video {
+    text-align: center;
+  }
+  
+  .page3-video video {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .page3-designs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .page3-designs img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .page3-confirm-button {
+    width: 100%;
+    max-width: 200px;
+    height: 40px;
+    margin-top: 20px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .page3-confirm-button:hover {
+    background-color: #000;
+  }

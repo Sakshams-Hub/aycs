@@ -1,0 +1,76 @@
+/* Styles for Page 1: Enter Your Details */
+
+.page1-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .page1-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .page1-container input[type="text"],
+  .page1-container input[type="email"],
+  .page1-container select {
+    width: 300px;
+    height: 40px;
+    margin-bottom: 15px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .page1-container select {
+    appearance: none;
+  }
+  
+  .page1-container button {
+    width: 150px;
+    height: 40px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .page1-container button:hover {
+    background-color: #000;
+  }
+  
+  .size-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .size-checkboxes label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .size-checkboxes input[type="checkbox"] {
+    display: none;
+  }
+  
+  .size-checkboxes span {
+    font-size: 16px;
+  }
+  
+  .size-checkboxes input[type="checkbox"]:checked + span {
+    font-weight: bold;
+  }
+  
