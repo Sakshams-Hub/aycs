@@ -1,16 +1,22 @@
 /* CSS for page 2: T-shirt selection */
 
+
+
 .page2-container {
+    text-align: center; /* Center align the content */
+  }
+  
+  .tshirt-cards-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 20px; /* Add margin to create space between cards and button */
+    margin-bottom: 40px; /* Add margin between cards and button */
   }
   
   .tshirt-card {
     position: relative;
-    margin: 10px;
-    width: 200px; /* Adjust width as needed */
+    margin: 20px; /* Increase margin to create space around cards */
+    width: 250px; /* Increase width of cards */
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow: hidden;
@@ -45,14 +51,14 @@
   }
   
   .button-container {
-    text-align: center;
+    margin-top: 20px; /* Add margin to separate button from cards */
   }
   
   .button {
-    background-color: #007bff;
+    background-color: #000000;
     color: #fff;
     border: none;
-    padding: 10px 20px; /* Increase padding for better visibility */
+    padding: 10px 20px;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;

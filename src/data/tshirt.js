@@ -22,7 +22,7 @@ const tshirt =  [
         sku: 'be',
         gsm: '200gsm',
         product: '100% cotton'
-    },
+    }
     
     ]
 

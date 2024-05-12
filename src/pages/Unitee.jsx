@@ -11,7 +11,7 @@ import tshirt from '../data/tshirt';
 import designs from '../data/design';
 import videos from '../data/videos';
 
-function App() {
+function Unitee() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [size, setSize] = useState('');
@@ -139,10 +139,6 @@ function App() {
       <input type="checkbox" value="XL" checked={size === "XL"} onChange={() => setSize("XL")} />
       <span>XL</span>
     </label>
-    <label>
-      <input type="checkbox" value="XXL" checked={size === "XXL"} onChange={() => setSize("XXL")} />
-     <span>XXL</span>
-    </label>
   </div>
           <button onClick={handleStart}>Start</button>
         </div>
@@ -150,23 +146,14 @@ function App() {
 
         {/* Page 2: Select a T-shirt */}
         {page === 2 && (
-  <div className="page2-container">
-    <h2>Select a T-shirt</h2>
-    {tshirt.map((tshirt) => (
-      <div className="tshirt-card" key={tshirt.sku}>
-        <img src={tshirt.image} alt={tshirt.name} />
-        <div className="tshirt-info">
-          <p>Color: {tshirt.name}</p>
-          <p>GSM: {tshirt.gsm}</p>
-          <p>Product: {tshirt.product}</p>
-        </div>
-      </div>
-    ))}
-     <div className="button-container">
-      <button className="button" onClick={() => setPage(3)}>Next</button>
-    </div>
-  </div>
-)}
+         <div className="page2-container"> {/* Apply the CSS class for page 2 styling */}
+         <h2>Select a T-shirt</h2>
+         {tshirt.map((tshirt) => (
+           <img key={tshirt.sku} src={tshirt.image} alt={tshirt.name} onClick={() => handleTshirtSelection(tshirt)} />
+         ))}
+         <button onClick={() => setPage(3)}>Next</button>
+       </div>
+      )}
 
       {/* Page 3: Select a Design, View Video, Confirm */}
       {page === 3 && (
@@ -182,7 +169,8 @@ function App() {
             {designs.map((design) => (
               <img key={design.sku} src={design.image} alt={design.name} onClick={() => handleDesignSelection(design)} />
             ))}
-            {selectedDesignDetails && (
+          </div>
+          {selectedDesignDetails && (
               <div>
                 <p>Design Name: {selectedDesignDetails.name}</p>
                 <p>Artist: {selectedDesignDetails.ArtistName}</p>
@@ -190,7 +178,6 @@ function App() {
             )}
             <button className="page3-confirm-button" onClick={handleConfirm}>Confirm</button>
             <button onClick={() => setPage(2)}>Back</button>
-          </div>
         </div>
       )}
 
@@ -205,4 +192,4 @@ function App() {
   );
 }
 
-export default App;
+export default Unitee;
