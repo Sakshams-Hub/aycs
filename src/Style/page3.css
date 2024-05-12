@@ -26,11 +26,11 @@
     flex-direction: column;
     align-items: center;
     overflow-y: auto; /* Add scroll for vertical overflow */
-    max-height: 300px; /* Limit the height and add scroll when necessary */
+    max-height: 500px; /* Limit the height and add scroll when necessary */
 }
 
 .page3-designs img {
-    width: 50%; /* Display two images in one row */
+    width: calc(50% - 10px); /* Adjusted width to accommodate two images with a small gap between them */
     max-width: 200px;
     height: auto;
     cursor: pointer;

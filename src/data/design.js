@@ -3,42 +3,42 @@ const designs =  [
     name: 'dont do drugs',
     image: 'images/designs/ddd.png',
     sku: 'nk-ddd02',
-    ArtistName: 'niskaa kulchandani',
+    ArtistName: 'Niskaa kulchandani',
        },
 
        {
         name: 'stay trippy',
         image: 'images/designs/st.png',
         sku: 'nk-st01',
-        ArtistName: 'niskaa kulchandani',
+        ArtistName: 'Jay',
         },
 
         {
             name: 'dont do drugs',
             image: 'images/designs/ddd.png',
             sku: 'nk-ddd02',
-            ArtistName: 'niskaa kulchandani',
+            ArtistName: 'Nikita talanki',
         },
         
         {
                 name: 'stay trippy',
                 image: 'images/designs/st.png',
                 sku: 'nk-st01',
-                ArtistName: 'niskaa kulchandani',
+                ArtistName: 'Sarthak',
         },
 
         {
             name: 'dont do drugs',
             image: 'images/designs/ddd.png',
             sku: 'nk-ddd02',
-            ArtistName: 'niskaa kulchandani',
+            ArtistName: 'Niskaa kulchandani',
         },
         
         {
                 name: 'stay trippy',
                 image: 'images/designs/st.png',
                 sku: 'nk-st01',
-                ArtistName: 'niskaa kulchandani',
+                ArtistName: 'Niskaa kulchandani',
         }
         
         
