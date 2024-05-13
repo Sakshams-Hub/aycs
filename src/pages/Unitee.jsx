@@ -5,6 +5,8 @@ import '../firebase';
 import '../Style/page1.css';
 import '../Style/page2.css';
 import '../Style/page3.css';
+import page1 from '../Audio/page1.mp3';
+import Page2_3 from '../Audio/Page2_3.mp3';
 
 // Import data files
 import tshirt from '../data/tshirt';
@@ -24,7 +26,8 @@ function Unitee() {
   const storedCounter = localStorage.getItem('orderCounter');
   const initialOrderCounter = storedCounter ? parseInt(storedCounter) : 1000;
   const [orderCounter, setOrderCounter] = useState(initialOrderCounter);
-  const [selectedArtist, setSelectedArtist] = useState(null); // Added state for selected artist
+  const [selectedArtist, setSelectedArtist] = useState(null);
+  const [audioPlaying, setAudioPlaying] = useState(false); // Added state for selected artist
   
   const [page, setPage] = useState(1);
   const firestore = collection(fireDB, 'orders');
@@ -32,9 +35,14 @@ function Unitee() {
   useEffect(() => {
     // Generate order ID when component mounts
     generateOrderId();
+     
+    return () => {
+      if (page === 1) {
+        setAudioPlaying(true);
+      }
+    };
 
-
-  }, []);
+  }, [page]);
 
   const generateOrderId = () => {
     // Generate order ID starting from 1000
@@ -56,6 +64,8 @@ function Unitee() {
     }
     // Proceed to T-shirt selection page
     setPage(2);
+    setAudioPlaying(true);
+    console.log('Audio playing:', audioPlaying);
   };
 
   const handleTshirtSelection = (selectedTshirt) => {
@@ -63,6 +73,8 @@ function Unitee() {
     setSelectedTshirt(selectedTshirt);
     setSelectedDesign(null);
     setVideoPlaying(false);
+    setAudioPlaying(true);
+    console.log('Audio playing:', audioPlaying);
   };
 
   const handleDesignSelection = (selectedDesign) => {
@@ -125,11 +137,8 @@ function Unitee() {
       {/* Page 1: Enter Your Details */}
       {page === 1 && (
         <div className="page1-container">
-          <h2>Enter Your Details</h2>
-          {/* <audio controls>
-          <source src="../Audio/page1.mp3" type="audio/mp3" />
-             Your browser does not support the audio element.
-          </audio> */}
+          <h2>Enter Your Details</h2> 
+      
           <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
           <div className="size-checkboxes">
@@ -155,21 +164,46 @@ function Unitee() {
       )}
 
       {/* Page 2: Select a T-shirt */}
-      {page === 2 && (
+      {/* {page === 2 && (
         <div className="page2-container">
           <h2>Select a T-shirt</h2>
+          {audioPlaying && <audio autoPlay loop><source src={page1} type="audio/mp3" /></audio>} 
           {tshirt.map((tshirt) => (
             <img key={tshirt.sku} src={tshirt.image} alt={tshirt.name} onClick={() => handleTshirtSelection(tshirt)} />
           ))}
           <button onClick={() => setPage(3)}>Next</button>
         </div>
-      )}
+      )} */}
+
+
+{page === 2 && (
+  <div className="page2-container">
+    <h2>Select a T-shirt</h2>
+    {audioPlaying && <audio autoPlay loop><source src={page1} type="audio/mp3" /></audio>}
+    <div className="tshirt-cards-container">
+      {tshirt.map((tshirt) => (
+        <div className="tshirt-card" key={tshirt.sku}>
+          <img src={tshirt.image} alt={tshirt.name} onClick={() => handleTshirtSelection(tshirt)} />
+          <div className="tshirt-info">
+            <p>Color: {tshirt.name}</p>
+            <p>GSM: {tshirt.gsm}</p>
+            <p>Product: {tshirt.product}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div className="button-container">
+      <button className="button" onClick={() => setPage(3)}>Next</button>
+    </div>
+  </div>
+)}
 
       {/* Page 3: Select a Design, View Video, Confirm */}
       {page === 3 && (
         <div className="page3-container">
           <div className="page3-video">
             <h2>Select a Design</h2>
+            {audioPlaying && <audio autoPlay loop><source src={Page2_3} type="audio/mp3" /></audio>} 
             <video id="selectedVideo" controls autoPlay loop>
               <source src={videos.find((video) => video.sku === `${selectedTshirt?.sku}-${selectedDesign?.sku}`)?.videourl} type="video/mp4" />
               Your browser does not support the video tag.
