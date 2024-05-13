@@ -27,7 +27,8 @@ function Unitee() {
   const initialOrderCounter = storedCounter ? parseInt(storedCounter) : 1000;
   const [orderCounter, setOrderCounter] = useState(initialOrderCounter);
   const [selectedArtist, setSelectedArtist] = useState(null);
-  const [audioPlaying, setAudioPlaying] = useState(false); // Added state for selected artist
+  const [audioPlaying, setAudioPlaying] = useState(false);
+  const [sortBy, setSortBy] = useState(''); // Added state for selected artist
   
   const [page, setPage] = useState(1);
   const firestore = collection(fireDB, 'orders');
@@ -132,6 +133,19 @@ function Unitee() {
   // Function to filter designs by selected artist
   const filteredDesigns = selectedArtist ? designs.filter(design => design.ArtistName === selectedArtist) : designs;
 
+  // Function to sort designs by category
+  const sortDesignsByCategory = (category) => {
+    setSortBy(category);
+  };
+
+  // Filter designs based on selected sorting method
+  let sortedDesigns = [...filteredDesigns];
+  if (sortBy === 'artist') {
+    sortedDesigns.sort((a, b) => a.ArtistName.localeCompare(b.ArtistName));
+  } else if (sortBy === 'category') {
+    sortedDesigns.sort((a, b) => a.category.localeCompare(b.category));
+  }
+
   return (
     <div>
       {/* Page 1: Enter Your Details */}
@@ -212,15 +226,13 @@ function Unitee() {
          
           <div className="page3-designs">
             {/* Dropdown for selecting artist */}
-            <select value={selectedArtist} onChange={(e) => setSelectedArtist(e.target.value)}>
-              <option value="">All Artists</option>
-              {/* Create options from unique artist names */}
-              {[...new Set(designs.map(design => design.ArtistName))].map(artist => (
-                <option key={artist} value={artist}>{artist}</option>
-              ))}
+            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+              <option value="">Sort By</option>
+              <option value="artist">Artist</option>
+              <option value="category">Category</option>
             </select>
             {/* Display designs filtered by selected artist */}
-            {filteredDesigns.map((design) => (
+            {sortedDesigns.map((design) => (
               <img key={design.sku} src={design.image} alt={design.name} onClick={() => handleDesignSelection(design)} />
             ))}
           </div>

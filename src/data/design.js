@@ -4,34 +4,39 @@ const designs =  [
     image: 'images/designs/ddd.png',
     sku: 'nk-ddd02',
     ArtistName: 'Niskaa kulchandani',
+    category: 'psychedelic',
        },
 
        {
-        name: 'stay trippy',
+        name: 'J in the box',
         image: 'images/designs/st.png',
-        sku: 'nk-st01',
-        ArtistName: 'Jay',
+        sku: 'jp-jitb01',
+        ArtistName: 'Jay Pimpalkhare',
+        category: 'Graffiti',
         },
 
         {
-            name: 'dont do drugs',
+            name: 'own your mind',
             image: 'images/designs/ddd.png',
-            sku: 'nk-ddd02',
-            ArtistName: 'Nikita talanki',
+            sku: 'nt-oym02',
+            ArtistName: 'Nikita Talanki',
+            category: 'relatable',
         },
         
         {
-                name: 'stay trippy',
+                name: 'the last bouquet',
                 image: 'images/designs/st.png',
-                sku: 'nk-st01',
-                ArtistName: 'Sarthak',
+                sku: 'sd-tlb01',
+                ArtistName: 'Sarthak Durugkar',
+                category: 'typography',
         },
 
         {
-            name: 'dont do drugs',
+            name: 'Dopamine Rush',
             image: 'images/designs/ddd.png',
-            sku: 'nk-ddd02',
+            sku: 'nk-dr02',
             ArtistName: 'Niskaa kulchandani',
+            category: 'relatable',
         },
         
         {
@@ -39,6 +44,7 @@ const designs =  [
                 image: 'images/designs/st.png',
                 sku: 'nk-st01',
                 ArtistName: 'Niskaa kulchandani',
+                category: 'abstract art',
         }
         
         
