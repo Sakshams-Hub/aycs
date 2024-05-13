@@ -254,6 +254,7 @@ function Unitee() {
            {audioPlaying && <audio autoPlay loop><source src={FINALPAGE} type="audio/mp3" /></audio>} 
           <h2>Hey {name}, your T-shirt is ready!</h2>
           <p>{orderId}</p>
+          <button onClick={() => setPage(0)}>Back to start</button>
         </div>
       )}
     </div>
