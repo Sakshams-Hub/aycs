@@ -1,0 +1,25 @@
+.page0-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Optionally, adjust as needed */
+  }
+  
+  .centered {
+    text-align: center;
+  }
+  
+  .button0 {
+    padding: 10px 20px;
+    background-color: #000000; /* Blue color, change as needed */
+    color: #fff; /* White text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .button0:hover {
+    background-color: #18191b; /* Darker shade of blue on hover */
+  }
+  

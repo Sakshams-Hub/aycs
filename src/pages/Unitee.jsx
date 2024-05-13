@@ -5,8 +5,10 @@ import '../firebase';
 import '../Style/page1.css';
 import '../Style/page2.css';
 import '../Style/page3.css';
-import page1 from '../Audio/page1.mp3';
-import Page2_3 from '../Audio/Page2_3.mp3';
+import '../Style/page0.css';
+import PAGE1final from '../Audio/PAGE1final.mp3';
+import PAGE2and3 from '../Audio/PAGE2and3.mp3';
+import FINALPAGE from '../Audio/FINALPAGE.mp3';
 
 // Import data files
 import tshirt from '../data/tshirt';
@@ -29,7 +31,7 @@ function Unitee() {
   const [selectedArtist, setSelectedArtist] = useState(null);
   const [audioPlaying, setAudioPlaying] = useState(false); // Added state for selected artist
   
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const firestore = collection(fireDB, 'orders');
 
   useEffect(() => {
@@ -37,7 +39,7 @@ function Unitee() {
     generateOrderId();
      
     return () => {
-      if (page === 1) {
+      if (page === 0) {
         setAudioPlaying(true);
       }
     };
@@ -134,11 +136,21 @@ function Unitee() {
 
   return (
     <div>
+
+
+      {page === 0 && (
+        <div className="page0-container">
+            <div className="centered">
+       <button className="button0" onClick={() => setPage(1)}>Start</button>
+           </div>
+        </div>
+      )}
+
       {/* Page 1: Enter Your Details */}
       {page === 1 && (
         <div className="page1-container">
           <h2>Enter Your Details</h2> 
-      
+          {audioPlaying && <audio autoPlay loop><source src={PAGE1final} type="audio/mp3" /></audio>} 
           <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
           <div className="size-checkboxes">
@@ -159,7 +171,7 @@ function Unitee() {
               <span>XL</span>
             </label>
           </div>
-          <button onClick={handleStart}>Start</button>
+          <button onClick={handleStart}>Next</button>
         </div>
       )}
 
@@ -179,7 +191,7 @@ function Unitee() {
 {page === 2 && (
   <div className="page2-container">
     <h2>Select a T-shirt</h2>
-    {audioPlaying && <audio autoPlay loop><source src={page1} type="audio/mp3" /></audio>}
+    {audioPlaying && <audio autoPlay loop><source src={PAGE2and3} type="audio/mp3" /></audio>}
     <div className="tshirt-cards-container">
       {tshirt.map((tshirt) => (
         <div className="tshirt-card" key={tshirt.sku}>
@@ -203,7 +215,7 @@ function Unitee() {
         <div className="page3-container">
           <div className="page3-video">
             <h2>Select a Design</h2>
-            {audioPlaying && <audio autoPlay loop><source src={Page2_3} type="audio/mp3" /></audio>} 
+            {audioPlaying && <audio autoPlay loop><source src={PAGE2and3} type="audio/mp3" /></audio>} 
             <video id="selectedVideo" controls autoPlay loop>
               <source src={videos.find((video) => video.sku === `${selectedTshirt?.sku}-${selectedDesign?.sku}`)?.videourl} type="video/mp4" />
               Your browser does not support the video tag.
@@ -239,6 +251,7 @@ function Unitee() {
       {/* Page 4: Confirmation */}
       {page === 4 && (
         <div className="page4-container">
+           {audioPlaying && <audio autoPlay loop><source src={FINALPAGE} type="audio/mp3" /></audio>} 
           <h2>Hey {name}, your T-shirt is ready!</h2>
           <p>{orderId}</p>
         </div>
