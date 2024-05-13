@@ -36,7 +36,6 @@ function Unitee() {
 
   useEffect(() => {
     // Generate order ID when component mounts
-    generateOrderId();
      
     return () => {
       if (page === 0) {
@@ -210,43 +209,50 @@ function Unitee() {
   </div>
 )}
 
-      {/* Page 3: Select a Design, View Video, Confirm */}
-      {page === 3 && (
-        <div className="page3-container">
-          <div className="page3-video">
-            <h2>Select a Design</h2>
-            {audioPlaying && <audio autoPlay loop><source src={PAGE2and3} type="audio/mp3" /></audio>} 
-            <video id="selectedVideo" controls autoPlay loop>
-              <source src={videos.find((video) => video.sku === `${selectedTshirt?.sku}-${selectedDesign?.sku}`)?.videourl} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video> 
-          </div>
-         
-          <div className="page3-designs">
-            {/* Dropdown for selecting artist */}
-            <select value={selectedArtist} onChange={(e) => setSelectedArtist(e.target.value)}>
-              <option value="">All Artists</option>
-              
-              {/* Create options from unique artist names */}
-              {[...new Set(designs.map(design => design.ArtistName))].map(artist => (
-                <option key={artist} value={artist}>{artist}</option>
-              ))}
-            </select>
-            {/* Display designs filtered by selected artist */}
-            {filteredDesigns.map((design) => (
-              <img key={design.sku} src={design.image} alt={design.name} onClick={() => handleDesignSelection(design)} />
-            ))}
-          </div>
-          {selectedDesignDetails && (
-            <div>
-              <p>Design Name: {selectedDesignDetails.name}</p>
-              <p>Artist: {selectedDesignDetails.ArtistName}</p>
-            </div>
-          )}
-          <button className="page3-confirm-button" onClick={handleConfirm}>Confirm</button>
-          <button onClick={() => setPage(2)}>Back</button>
+{page === 3 && (
+  <div className="page3-container">
+    <div className="page3-content">
+      <div className="page3-video">
+        <h2>Select a Design</h2>
+        {audioPlaying && <audio autoPlay loop><source src={PAGE2and3} type="audio/mp3" /></audio>} 
+        <video id="selectedVideo" controls autoPlay loop>
+          <source src={videos.find((video) => video.sku === `${selectedTshirt?.sku}-${selectedDesign?.sku}`)?.videourl} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video> 
+      </div>
+      
+      <div className="page3-designs">
+        {/* Dropdown for selecting artist */}
+        <select value={selectedArtist} onChange={(e) => setSelectedArtist(e.target.value)}>
+          <option value="">All Artists</option>
+          
+          {/* Create options from unique artist names */}
+          {[...new Set(designs.map(design => design.ArtistName))].map(artist => (
+            <option key={artist} value={artist}>{artist}</option>
+          ))}
+        </select>
+        {/* Display designs filtered by selected artist */}
+        <div className="designs-row">
+          {filteredDesigns.map((design) => (
+            <img key={design.sku} src={design.image} alt={design.name} onClick={() => handleDesignSelection(design)} />
+          ))}
         </div>
-      )}
+      </div>
+    </div>
+    
+    {selectedDesignDetails && (
+      <div className="page3-details">
+        <p>Design Name: {selectedDesignDetails.name}</p>
+        <p>Artist: {selectedDesignDetails.ArtistName}</p>
+      </div>
+    )}
+    
+    <div className="page3-buttons">
+      <button className="page3-confirm-button" onClick={handleConfirm}>Confirm</button>
+      <button onClick={() => setPage(2)}>Back</button>
+    </div>
+  </div>
+)}
 
       {/* Page 4: Confirmation */}
       {page === 4 && (
