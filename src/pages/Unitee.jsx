@@ -30,6 +30,8 @@ function Unitee() {
   const [orderCounter, setOrderCounter] = useState(initialOrderCounter);
   const [selectedArtist, setSelectedArtist] = useState(null);
   const [audioPlaying, setAudioPlaying] = useState(false); // Added state for selected artist
+  const [sortBy, setSortBy] = useState('category'); // State to track sorting option
+  const [selectedCategory, setSelectedCategory] = useState(''); // State to track selected category
   
   const [page, setPage] = useState(0);
   const firestore = collection(fireDB, 'orders');
@@ -133,6 +135,12 @@ function Unitee() {
   // Function to filter designs by selected artist
   const filteredDesigns = selectedArtist ? designs.filter(design => design.ArtistName === selectedArtist) : designs;
 
+  // Function to filter designs by selected category
+  const filteredDesignsByCategory = selectedCategory ? designs.filter(design => design.category === selectedCategory) : designs;
+
+  // Determine which set of designs to display based on the sorting option
+  const sortedDesigns = sortBy === 'category' ? filteredDesignsByCategory : filteredDesigns;
+
   return (
     <div>
 
@@ -174,18 +182,6 @@ function Unitee() {
         </div>
       )}
 
-      {/* Page 2: Select a T-shirt */}
-      {/* {page === 2 && (
-        <div className="page2-container">
-          <h2>Select a T-shirt</h2>
-          {audioPlaying && <audio autoPlay loop><source src={page1} type="audio/mp3" /></audio>} 
-          {tshirt.map((tshirt) => (
-            <img key={tshirt.sku} src={tshirt.image} alt={tshirt.name} onClick={() => handleTshirtSelection(tshirt)} />
-          ))}
-          <button onClick={() => setPage(3)}>Next</button>
-        </div>
-      )} */}
-
 
 {page === 2 && (
   <div className="page2-container">
@@ -213,7 +209,7 @@ function Unitee() {
   <div className="page3-container">
     <div className="page3-content">
       <div className="page3-video">
-        <h2>Select a Design</h2>
+        {/* <h2>Select a Design</h2> */}
         {audioPlaying && <audio autoPlay loop><source src={PAGE2and3} type="audio/mp3" /></audio>} 
         <video id="selectedVideo" controls autoPlay loop>
           <source src={videos.find((video) => video.sku === `${selectedTshirt?.sku}-${selectedDesign?.sku}`)?.videourl} type="video/mp4" />
@@ -223,20 +219,34 @@ function Unitee() {
       
       <div className="page3-designs">
         {/* Dropdown for selecting artist */}
-        <select value={selectedArtist} onChange={(e) => setSelectedArtist(e.target.value)}>
-          <option value="">All Artists</option>
-          
-          {/* Create options from unique artist names */}
-          {[...new Set(designs.map(design => design.ArtistName))].map(artist => (
-            <option key={artist} value={artist}>{artist}</option>
-          ))}
-        </select>
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                <option value="category">Sort by Category</option>
+                <option value="artist">Sort by Artist</option>
+              </select>
+              {sortBy === 'category' && (
+                <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+                  <option value="">All Categories</option>
+                  {/* Create options from unique categories */}
+                  {[...new Set(designs.map(design => design.category))].map(category => (
+                    <option key={category} value={category}>{category}</option>
+                  ))}
+                </select>
+              )}
+              {sortBy === 'artist' && (
+                <select value={selectedArtist} onChange={(e) => setSelectedArtist(e.target.value)}>
+                  <option value="">All Artists</option>
+                  {/* Create options from unique artist names */}
+                  {[...new Set(designs.map(design => design.ArtistName))].map(artist => (
+                    <option key={artist} value={artist}>{artist}</option>
+                  ))}
+                </select>
+              )}
         {/* Display designs filtered by selected artist */}
         <div className="designs-row">
-          {filteredDesigns.map((design) => (
-            <img key={design.sku} src={design.image} alt={design.name} onClick={() => handleDesignSelection(design)} />
-          ))}
-        </div>
+              {sortedDesigns.map((design) => (
+                <img key={design.sku} src={design.image} alt={design.name} onClick={() => handleDesignSelection(design)} />
+              ))}
+          </div>
       </div>
     </div>
     

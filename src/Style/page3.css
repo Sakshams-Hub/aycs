@@ -1,74 +1,72 @@
 .page3-container {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh; /* Use viewport height (vh) */
+}
+
+.page3-video {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  z-index: -1; /* Set z-index to ensure it's behind other content */
+}
+
+.page3-content {
+  display: flex;
+  justify-content: flex-end; /* Align content to the right */
+  align-items: flex-start;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.page3-designs {
+  width: 45%;
+  max-width: 20rem; /* Use relative unit rem */
+  padding: 0 1.25rem; /* Use relative unit rem */
+}
+
+.designs-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.page3-designs img {
+  width: calc(50% - 0.625rem); /* Use relative unit rem */
+  max-width: 10rem; /* Use relative unit rem */
+  height: auto;
+  cursor: pointer;
+  margin-bottom: 0.625rem; /* Use relative unit rem */
+  border: 0.125rem solid #ccc; /* Use relative unit rem */
+  box-sizing: border-box;
+}
+
+@media (max-width: 48rem) { /* Use relative unit rem */
+  .page3-content {
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: 100%;
   }
-  
+
   .page3-video {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    object-fit: cover;
+    position: relative;
     z-index: -1; /* Set z-index to ensure it's behind other content */
   }
-  
-  .page3-content {
-    display: flex;
-    justify-content: flex-end; /* Align content to the right */
-    align-items: flex-start;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    
-  }
-  
+
+  .page3-video,
   .page3-designs {
-    width: 45%;
-    max-width: 320px;
-    padding: 0 20px;
+    width: 100%;
+    max-width: none;
   }
-  
-  .designs-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    max-height: 100%;
-    overflow-y: auto;
-  }
-  
+
   .page3-designs img {
-    width: calc(50% - 10px);
-    max-width: 150px;
-    height: auto;
-    cursor: pointer;
-    margin-bottom: 10px;
-    border: 2px solid #ccc;
-    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
   }
-  
-  @media (max-width: 768px) {
-    .page3-content {
-      flex-direction: column;
-    }
-  
-    .page3-video {
-      position: relative;
-      z-index: -1; /* Set z-index to ensure it's behind other content */
-    }
-  
-    .page3-video,
-    .page3-designs {
-      width: 100%;
-      max-width: none;
-    }
-  
-    .page3-designs img {
-      width: 100%;
-      max-width: none;
-    }
-  }
-  
+}
